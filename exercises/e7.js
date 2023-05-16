@@ -19,10 +19,19 @@
  *          }
  */
 
-export function parsePromised() {
-  // Your code goes here...
-
+export function parsePromised(json_string) {
+  return new Promise((resolve, reject) => {
+    try {
+      const parsedJSON = JSON.parse(json_string);
+      resolve(parsedJSON);
+    } catch (error) {
+      reject(new Error("Unexpected token T in JSON at position 0"));
+    }
+  });
 }
+
+
+
 
 
 /**
@@ -32,10 +41,11 @@ export function parsePromised() {
  * * logs the message property of the error object
  */
 
-export function onReject() {
-  // Your code goes here...
-
+export function onReject(error) {
+  console.log(error.message);
 }
+
+
 
 /**
  * @task
@@ -49,11 +59,17 @@ export function onReject() {
  * Example: export const promiseHandler = () => return <your code> 
  */
 
-export const handlePromise = () => {
-  // Your code goes here...
+export const handlePromise = (promise) => {
+  return promise
+    .then(value => value)
+    .catch(reason => {
+      if (reason.message) {
+        onReject(reason);
+        return;
+      }
+      return reason;
+    });
 }
-
-
 
 
 // === TEST YOURSELF ===

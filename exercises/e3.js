@@ -12,12 +12,18 @@
  * * * Returns a promise constructor that resolves with a number value passed as the argument
  * * else returns 0; 
  * * getPromise(num) function must be exported
- * Example: export const getPromise(num) => return <Your code of promise>
+ * Example: export const getPromise = (num) => return <Your code of promise>
 */ 
-export const getPromise = () => {
-  // Your code goes here...
-
+export const getPromise = (num) => {
+  if (Number.isInteger(num)) {
+    return new Promise((resolve, reject) => {
+      resolve(num);
+    });
+  } else {
+    return 0;
+  }
 };
+
 
 
 
@@ -33,10 +39,21 @@ export const getPromise = () => {
  * * Returns the sum value
  * * if you have solved it successfully, the updateSumValue() function will return the value of 10;
 */
-export const  updateSumValue = () => {
-  // Your code goes here...
-  
-}
+
+export const updateSumValue = async () => {
+  let sum = 2; // Initialize sum variable
+
+  try {
+    const promiseValue = await getPromise(120);
+    sum += promiseValue; 
+    sum += 8;
+    return sum;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 
 
 

@@ -10,7 +10,6 @@ const promise2 = Promise.reject('Promise 2 REJECTED');
 const promise3 = Promise.resolve('Promise 3 RESOLVED');
 const promise4 = new Promise((res) => setTimeout(res, 3000, 'RESOLVED AGAIN'));
 const promiseArr = [promise1, promise2, promise3, promise4];
-
 /**
  * @task
  * Use a correct PROMISE shortcut from the list:
@@ -21,7 +20,15 @@ const promiseArr = [promise1, promise2, promise3, promise4];
  * when promiseArr was passed as the argument
  */
 
-export const result1 = val; // Your code here
+export const result1 = Promise.allSettled(promiseArr)
+  .then(results => {
+    const rejected = results.find(result => result.status === 'rejected');
+    if (rejected) {
+      console.log(rejected.reason);
+      return rejected.reason;
+    }
+  });
+
 
 /**
  * @task
@@ -33,7 +40,18 @@ export const result1 = val; // Your code here
  * when promiseArr was passed as the argument
  */
 
-export const result2 = val; // Your code here
+export const result2 = Promise.any(promiseArr)
+  .then(value => {
+    if (value === 'Promise 3 RESOLVED') {
+      console.log(value);
+      return value;
+    }
+  })
+  .catch(error => {
+    // Handle the situation where all promises reject
+    console.error(error);
+  });
+
 
 /**
  * @task
@@ -45,7 +63,13 @@ export const result2 = val; // Your code here
  * when promiseArr was passed as the argument
  */
 
-export const result3 = val; // Your code here
+export const result3 = Promise.allSettled(promiseArr)
+  .then(results => {
+    console.log(results);
+    return results;
+  });
+
+
 
 /**
  * @task
@@ -56,7 +80,8 @@ export const result3 = val; // Your code here
  * Example: export const newPromiseArr = promiseArr.<method>()...
  */
 
-export const newPromiseArr = val; // Your code here
+export const newPromiseArr = promiseArr.filter(promise => promise !== promise2 && promise !== promise3);
+
 
 // Do NOT refactor or update result 4, it's all set to work
 export const result4 = Promise.race(newPromiseArr)
