@@ -20,13 +20,9 @@ const promiseArr = [promise1, promise2, promise3, promise4];
  * when promiseArr was passed as the argument
  */
 
-export const result1 = Promise.allSettled(promiseArr)
-  .then(results => {
-    const rejected = results.find(result => result.status === 'rejected');
-    if (rejected) {
-      console.log(rejected.reason);
-      return rejected.reason;
-    }
+export const result1 = Promise.all(promiseArr).catch((reason) => {
+    console.log(reason);
+    return reason;
   });
 
 
@@ -42,14 +38,8 @@ export const result1 = Promise.allSettled(promiseArr)
 
 export const result2 = Promise.any(promiseArr)
   .then(value => {
-    if (value === 'Promise 3 RESOLVED') {
-      console.log(value);
-      return value;
-    }
-  })
-  .catch(error => {
-    // Handle the situation where all promises reject
-    console.error(error);
+    console.log(value);
+    return value;
   });
 
 
@@ -63,8 +53,7 @@ export const result2 = Promise.any(promiseArr)
  * when promiseArr was passed as the argument
  */
 
-export const result3 = Promise.allSettled(promiseArr)
-  .then(results => {
+export const result3 = Promise.allSettled(promiseArr).then(results => {
     console.log(results);
     return results;
   });
@@ -80,7 +69,9 @@ export const result3 = Promise.allSettled(promiseArr)
  * Example: export const newPromiseArr = promiseArr.<method>()...
  */
 
-export const newPromiseArr = promiseArr.filter(promise => promise !== promise2 && promise !== promise3);
+export const newPromiseArr = promiseArr.filter(
+  (promise) => promise !== promise2 && promise !== promise3
+);
 
 
 // Do NOT refactor or update result 4, it's all set to work

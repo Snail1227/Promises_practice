@@ -39,8 +39,7 @@ const getLoginList = (data) => {
 */
 
 // Your code goes here ...
-const getData = fetch(usersUrl)
-  .then(response => response.json());
+const getData = fetch(usersUrl);
 
 /**
  * @task 
@@ -55,11 +54,13 @@ const getData = fetch(usersUrl)
 
 // Your code goes here ...
 export const result = getData
+  .then(response => response.json())
   .then(data => getLoginList(data))
   .then(logins => {
     console.log(logins);
     return logins;
   });
+
 
 
 // === TEST YOURSELF ===

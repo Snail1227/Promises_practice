@@ -16,7 +16,7 @@
 */ 
 export const getPromise = (num) => {
   if (Number.isInteger(num)) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve ) => {
       resolve(num);
     });
   } else {
@@ -40,18 +40,11 @@ export const getPromise = (num) => {
  * * if you have solved it successfully, the updateSumValue() function will return the value of 10;
 */
 
-export const updateSumValue = async () => {
+export const updateSumValue = () => {
   let sum = 2; // Initialize sum variable
-
-  try {
-    const promiseValue = await getPromise(120);
-    sum += promiseValue; 
-    sum += 8;
-    return sum;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  getPromise(120).then((val) => sum += val);
+  sum += 8;
+  return sum;
 };
 
 

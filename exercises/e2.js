@@ -17,7 +17,9 @@
 
 export const getPromise = (bool) => {
   return new Promise((resolve, reject) => {
-    return (bool) ? resolve('The PROMISE was RESOLVED') : reject('The PROMISE was REJECTED');
+    return (bool) 
+      ? resolve('The PROMISE was RESOLVED') 
+      : reject('The PROMISE was REJECTED');
   })
 };
 
@@ -32,8 +34,10 @@ export const getPromise = (bool) => {
 
 export const handlePromise = ((promise) => {
   return promise.then(
-    (value) => {return value},
-    (reason) => {return "Uh Oh"}
+    (value) => value,
+    () => {
+      return "Uh Oh"
+    }
   );
 });
 

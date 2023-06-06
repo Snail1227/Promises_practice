@@ -30,9 +30,7 @@ const second = (val) => {
 // });
 
 export const handlePromise = first()
-  .then((val) => {
-    return second(val);
-  })
+  .then((val) => second(val))
   .then((result) => {
     console.log(result);
     return result;

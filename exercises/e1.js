@@ -22,10 +22,10 @@ export const getPromise = new Promise((res) => {
     setTimeout(() => {
         res("The PROMISE was RESOLVED");
     }, 1000);
+}).then((value) =>{
+    console.log(value);
+    return value;
 });
-
-getPromise
-    .then((value) => console.log(value));
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-1"
